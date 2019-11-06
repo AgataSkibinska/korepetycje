@@ -1,4 +1,4 @@
-package com.inz.korepetycje.entity;
+package com.inz.korepetycje.model;
 
 public enum RoleName {
     ROLE_USER,

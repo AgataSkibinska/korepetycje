@@ -1,8 +1,8 @@
 package com.inz.korepetycje.controller;
 
-import com.inz.korepetycje.entity.Role;
-import com.inz.korepetycje.entity.RoleName;
-import com.inz.korepetycje.entity.User;
+import com.inz.korepetycje.model.Role;
+import com.inz.korepetycje.model.RoleName;
+import com.inz.korepetycje.model.User;
 import com.inz.korepetycje.exception.AppException;
 import com.inz.korepetycje.payload.ApiResponse;
 import com.inz.korepetycje.payload.JwtAuthenticationResponse;

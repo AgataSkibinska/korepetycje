@@ -1,7 +1,7 @@
 package com.inz.korepetycje.repository;
 
-import com.inz.korepetycje.entity.Role;
-import com.inz.korepetycje.entity.RoleName;
+import com.inz.korepetycje.model.Role;
+import com.inz.korepetycje.model.RoleName;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

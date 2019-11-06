@@ -1,6 +1,6 @@
 package com.inz.korepetycje.repository;
 
-import com.inz.korepetycje.entity.User;
+import com.inz.korepetycje.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

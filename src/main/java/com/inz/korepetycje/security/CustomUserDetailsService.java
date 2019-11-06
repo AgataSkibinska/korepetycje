@@ -1,6 +1,6 @@
 package com.inz.korepetycje.security;
 
-import com.inz.korepetycje.entity.User;
+import com.inz.korepetycje.model.User;
 import com.inz.korepetycje.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
