@@ -6,13 +6,16 @@ import org.springframework.lang.NonNull;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "advertisements", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {
-        "user_id"
-    })
-})
+@Table(name = "advertisements")
+//    , uniqueConstraints = {
+//    @UniqueConstraint(columnNames = {
+//        "user_id"
+//    })
+//})
 public class Advertisement extends UserDateAudit {
 
     @Id
@@ -33,25 +36,20 @@ public class Advertisement extends UserDateAudit {
     @NonNull
     private int durationInMinutes;
 
-
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "user_id", nullable = false)
+//    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "curriculumRange_id", nullable = false)
-    private CurriculumRange curriculumRange;
+    private CurriculumRangeName curriculumRange;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "lessonLocationType_id", nullable = false)
-    private LessonLocationType lessonLocationType;
+    private LessonLocationTypeName lessonLocationType;
 
-    //TODO: dodać lokalizację, jakieś api czy cos
+    @ElementCollection
+    private List<String> locations = new ArrayList<>();
 
 
     public Advertisement() {
@@ -61,15 +59,13 @@ public class Advertisement extends UserDateAudit {
                          @NotBlank String description,
                          double price,
                          int durationInMinutes,
-                         User user,
                          Subject subject,
-                         CurriculumRange curriculumRange,
-                         LessonLocationType lessonLocationType) {
+                         CurriculumRangeName curriculumRange,
+                         LessonLocationTypeName lessonLocationType) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.durationInMinutes = durationInMinutes;
-        this.user = user;
         this.subject = subject;
         this.curriculumRange = curriculumRange;
         this.lessonLocationType = lessonLocationType;
@@ -115,12 +111,12 @@ public class Advertisement extends UserDateAudit {
         this.durationInMinutes = durationInMinutes;
     }
 
-    public User getUser() {
-        return user;
+    public List<String> getLocations() {
+        return locations;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setLocations(List<String> locations) {
+        this.locations = locations;
     }
 
     public Subject getSubject() {
@@ -131,19 +127,19 @@ public class Advertisement extends UserDateAudit {
         this.subject = subject;
     }
 
-    public CurriculumRange getCurriculumRange() {
+    public CurriculumRangeName getCurriculumRange() {
         return curriculumRange;
     }
 
-    public void setCurriculumRange(CurriculumRange curriculumRange) {
+    public void setCurriculumRange(CurriculumRangeName curriculumRange) {
         this.curriculumRange = curriculumRange;
     }
 
-    public LessonLocationType getLessonLocationType() {
+    public LessonLocationTypeName getLessonLocationType() {
         return lessonLocationType;
     }
 
-    public void setLessonLocationType(LessonLocationType lessonLocationType) {
+    public void setLessonLocationType(LessonLocationTypeName lessonLocationType) {
         this.lessonLocationType = lessonLocationType;
     }
 }

@@ -15,11 +15,11 @@ public interface AdvertisementRepository extends JpaRepository<Advertisement, Lo
 
     Optional<Advertisement> findById(Long aLong);
 
-    Page<Advertisement> findAdvertisementByUserId(Long userId, Pageable pageable);
-
     List<Advertisement> findAdvertisementsByIdIn(List<Long> advertisementsIds);
 
     List<Advertisement> findAdvertisementsByIdIn(List<Long>advertisementsIds, Sort sort);
 
     List<Advertisement> findAdvertisementsBySubjectId(Long subjectId);
+
+    Page<Advertisement> findByCreatedBy(Long userId, Pageable pageable);
 }
