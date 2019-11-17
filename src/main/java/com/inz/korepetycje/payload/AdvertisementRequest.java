@@ -1,8 +1,8 @@
 package com.inz.korepetycje.payload;
 
-import org.springframework.lang.NonNull;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class AdvertisementRequest {
@@ -14,10 +14,10 @@ public class AdvertisementRequest {
     @NotBlank
     private String description;
 
-    @NonNull
+    @NotNull
     private double price;
 
-    @NonNull
+    @NotNull
     private int durationInMinutes;
 
     @NotBlank
@@ -28,6 +28,9 @@ public class AdvertisementRequest {
 
     @NotBlank
     private String lessonLocationType;
+
+    @NotNull
+    private Boolean tutoring;
 
     public String getTitle() {
         return title;
@@ -83,5 +86,13 @@ public class AdvertisementRequest {
 
     public void setLessonLocationType(String lessonLocationType) {
         this.lessonLocationType = lessonLocationType;
+    }
+
+    public Boolean getTutoring() {
+        return tutoring;
+    }
+
+    public void setTutoring(Boolean tutoring) {
+        this.tutoring = tutoring;
     }
 }

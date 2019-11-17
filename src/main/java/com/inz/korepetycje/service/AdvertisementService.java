@@ -43,7 +43,7 @@ public class AdvertisementService {
         this.subjectRepository = subjectRepository;
     }
 
-    public PagedResponse<AdvertisementResponse> getAllAdvertisements(UserPrincipal currentUser, int page, int size) {
+    public PagedResponse<AdvertisementResponse> getAllAdvertisements(int page, int size) {
         validatePageNumberAndSize(page, size);
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "createdAt");
         Page<Advertisement> ads = advertisementRepository.findAll(pageable);
@@ -73,6 +73,7 @@ public class AdvertisementService {
         advertisement.setDescription(advertisementRequest.getDescription());
         advertisement.setDurationInMinutes(advertisementRequest.getDurationInMinutes());
         advertisement.setPrice(advertisementRequest.getPrice());
+        advertisement.setTutoring(advertisementRequest.getTutoring());
 
         advertisement.setCurriculumRange(CurriculumRangeName.valueOf(advertisementRequest.getCurriculumRange()));
         advertisement.setLessonLocationType(LessonLocationTypeName.valueOf(advertisementRequest.getLessonLocationType()));
@@ -188,5 +189,29 @@ public class AdvertisementService {
         }
 
         advertisementRepository.delete(advertisement);
+    }
+
+    public PagedResponse<AdvertisementResponse> getAllAdvertisementsByTutoring(int page, int size, Boolean tutoring) {
+        validatePageNumberAndSize(page, size);
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "createdAt");
+        Page<Advertisement> ads = advertisementRepository.findAdvertisementsByTutoring(tutoring, pageable);
+
+        if (ads.getNumberOfElements() == 0) {
+            return new PagedResponse<>(Collections.emptyList(),
+                ads.getNumber(),
+                ads.getSize(),
+                ads.getTotalElements(),
+                ads.getTotalPages(),
+                ads.isLast());
+        }
+
+        Map<Long, User> creatorMap = getAdvertisementCreatorMap(ads.getContent());
+
+        List<AdvertisementResponse> adsResponses = ads
+            .map(ad -> ModelMapper.mapAdvertisementToAdvertisementResponse(ad, creatorMap.get(ad.getCreatedBy())))
+            .getContent();
+
+        return new PagedResponse<>(adsResponses, ads.getNumber(), ads.getSize(), ads.getTotalElements(), ads.getTotalPages(), ads.isLast());
+
     }
 }

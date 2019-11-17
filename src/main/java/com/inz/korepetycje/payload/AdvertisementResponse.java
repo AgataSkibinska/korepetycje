@@ -6,6 +6,9 @@ public class AdvertisementResponse {
     private String description;
     private double price;
     private int durationInMinutes;
+    private String subject;
+    private String curriculumRange;
+    private String lessonLocationType;
     private UserSummary createdBy;
 
     public Long getId() {
@@ -54,5 +57,29 @@ public class AdvertisementResponse {
 
     public void setCreatedBy(UserSummary createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getCurriculumRange() {
+        return curriculumRange;
+    }
+
+    public void setCurriculumRange(String curriculumRange) {
+        this.curriculumRange = curriculumRange;
+    }
+
+    public String getLessonLocationType() {
+        return lessonLocationType;
+    }
+
+    public void setLessonLocationType(String lessonLocationType) {
+        this.lessonLocationType = lessonLocationType;
     }
 }

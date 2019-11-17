@@ -22,4 +22,6 @@ public interface AdvertisementRepository extends JpaRepository<Advertisement, Lo
     List<Advertisement> findAdvertisementsBySubjectId(Long subjectId);
 
     Page<Advertisement> findByCreatedBy(Long userId, Pageable pageable);
+
+    Page<Advertisement> findAdvertisementsByTutoring(Boolean tutoring, Pageable pageable);
 }

@@ -53,13 +53,12 @@ public class AdvertisementController {
     }
 
     @GetMapping
-    public PagedResponse<AdvertisementResponse> getAdvertisements(@CurrentUser UserPrincipal currentUser,
-                                                                  @RequestParam(value = "page",
+    public PagedResponse<AdvertisementResponse> getAdvertisements(@RequestParam(value = "page",
                                                                       defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
                                                                   @RequestParam(value = "size",
                                                                       defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size
                                                                   ) {
-        return advertisementService.getAllAdvertisements(currentUser, page, size);
+        return advertisementService.getAllAdvertisements(page, size);
     }
 
     @GetMapping("/{advertisementId}")
@@ -86,4 +85,24 @@ public class AdvertisementController {
         advertisementService.deleteAdvertisement(currentUser, advertisementId);
         return ResponseEntity.ok().body(new ApiResponse(true, "Advertisement Deleted Successfully"));
     }
+
+    @GetMapping("/tutor")
+    public PagedResponse<AdvertisementResponse> getTutorAdvertisements(@RequestParam(value = "page",
+                                                                      defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
+                                                                  @RequestParam(value = "size",
+                                                                      defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size
+    ) {
+        return advertisementService.getAllAdvertisementsByTutoring(page, size, true );
+    }
+
+    @GetMapping("/student")
+    public PagedResponse<AdvertisementResponse> getStudentAdvertisements(@RequestParam(value = "page",
+                                                                           defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
+                                                                       @RequestParam(value = "size",
+                                                                           defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size
+    ) {
+        return advertisementService.getAllAdvertisementsByTutoring(page, size, false);
+    }
+
+
 }

@@ -15,6 +15,9 @@ public class ModelMapper {
         response.setDurationInMinutes(advertisement.getDurationInMinutes());
         response.setPrice(advertisement.getPrice());
         response.setTitle(advertisement.getTitle());
+        response.setCurriculumRange(advertisement.getCurriculumRange().name());
+        response.setLessonLocationType(advertisement.getLessonLocationType().name());
+        response.setSubject(advertisement.getSubject().getName().name());
 
         UserSummary userSummary = new UserSummary(creator.getId(),
             creator.getUsername(),

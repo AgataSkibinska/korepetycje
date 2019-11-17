@@ -1,10 +1,10 @@
 package com.inz.korepetycje.model;
 
 import com.inz.korepetycje.model.audit.UserDateAudit;
-import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,15 +30,11 @@ public class Advertisement extends UserDateAudit {
     @Lob
     private String description;
 
-    @NonNull
+    @NotNull
     private double price;
 
-    @NonNull
+    @NotNull
     private int durationInMinutes;
-
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "user_id", nullable = false)
-//    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "subject_id", nullable = false)
@@ -47,6 +43,9 @@ public class Advertisement extends UserDateAudit {
     private CurriculumRangeName curriculumRange;
 
     private LessonLocationTypeName lessonLocationType;
+
+    @NotNull
+    private Boolean tutoring;
 
     @ElementCollection
     private List<String> locations = new ArrayList<>();
@@ -61,7 +60,8 @@ public class Advertisement extends UserDateAudit {
                          int durationInMinutes,
                          Subject subject,
                          CurriculumRangeName curriculumRange,
-                         LessonLocationTypeName lessonLocationType) {
+                         LessonLocationTypeName lessonLocationType,
+                         Boolean tutoring) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -69,6 +69,7 @@ public class Advertisement extends UserDateAudit {
         this.subject = subject;
         this.curriculumRange = curriculumRange;
         this.lessonLocationType = lessonLocationType;
+        this.tutoring = tutoring;
     }
 
     public Long getId() {
@@ -141,5 +142,13 @@ public class Advertisement extends UserDateAudit {
 
     public void setLessonLocationType(LessonLocationTypeName lessonLocationType) {
         this.lessonLocationType = lessonLocationType;
+    }
+
+    public Boolean getTutoring() {
+        return tutoring;
+    }
+
+    public void setTutoring(Boolean tutoring) {
+        this.tutoring = tutoring;
     }
 }
