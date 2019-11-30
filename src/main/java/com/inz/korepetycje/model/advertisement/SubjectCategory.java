@@ -1,4 +1,4 @@
-package com.inz.korepetycje.model;
+package com.inz.korepetycje.model.advertisement;
 
 import org.hibernate.annotations.NaturalId;
 

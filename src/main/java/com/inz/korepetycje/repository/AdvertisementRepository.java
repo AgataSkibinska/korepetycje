@@ -1,6 +1,6 @@
 package com.inz.korepetycje.repository;
 
-import com.inz.korepetycje.model.Advertisement;
+import com.inz.korepetycje.model.advertisement.Advertisement;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -21,7 +21,9 @@ public interface AdvertisementRepository extends JpaRepository<Advertisement, Lo
 
     List<Advertisement> findAdvertisementsBySubjectId(Long subjectId);
 
-    Page<Advertisement> findByCreatedBy(Long userId, Pageable pageable);
+    Page<Advertisement> findByCreatedByAndTutoring(Long userId, Boolean tutoring, Pageable pageable);
 
     Page<Advertisement> findAdvertisementsByTutoring(Boolean tutoring, Pageable pageable);
+
+
 }

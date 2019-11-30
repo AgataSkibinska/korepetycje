@@ -1,5 +1,7 @@
 package com.inz.korepetycje.payload;
 
+import java.util.List;
+
 public class AdvertisementResponse {
     private Long id;
     private String title;
@@ -10,6 +12,40 @@ public class AdvertisementResponse {
     private String curriculumRange;
     private String lessonLocationType;
     private UserSummary createdBy;
+    private List<String> locations;
+
+    public AdvertisementResponse() {
+    }
+
+    public AdvertisementResponse(Long id,
+                                 String title,
+                                 String description,
+                                 double price,
+                                 int durationInMinutes,
+                                 String subject,
+                                 String curriculumRange,
+                                 String lessonLocationType,
+                                 UserSummary createdBy,
+                                 List<String> locations) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.durationInMinutes = durationInMinutes;
+        this.subject = subject;
+        this.curriculumRange = curriculumRange;
+        this.lessonLocationType = lessonLocationType;
+        this.createdBy = createdBy;
+        this.locations = locations;
+    }
+
+    public List<String> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<String> locations) {
+        this.locations = locations;
+    }
 
     public Long getId() {
         return id;

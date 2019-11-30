@@ -1,4 +1,4 @@
-package com.inz.korepetycje.model;
+package com.inz.korepetycje.model.advertisement;
 
 import com.inz.korepetycje.model.audit.UserDateAudit;
 
@@ -27,13 +27,10 @@ public class Advertisement extends UserDateAudit {
     private String title;
 
     @NotBlank
-    @Lob
     private String description;
 
-    @NotNull
     private double price;
 
-    @NotNull
     private int durationInMinutes;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

@@ -1,7 +1,7 @@
 package com.inz.korepetycje.repository;
 
-import com.inz.korepetycje.model.Subject;
-import com.inz.korepetycje.model.SubjectName;
+import com.inz.korepetycje.model.advertisement.Subject;
+import com.inz.korepetycje.model.advertisement.SubjectName;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

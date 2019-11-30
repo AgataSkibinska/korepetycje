@@ -1,6 +1,6 @@
 package com.inz.korepetycje.controller;
 
-import com.inz.korepetycje.model.Advertisement;
+import com.inz.korepetycje.model.advertisement.Advertisement;
 import com.inz.korepetycje.payload.AdvertisementRequest;
 import com.inz.korepetycje.payload.AdvertisementResponse;
 import com.inz.korepetycje.payload.ApiResponse;
@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/advertisements")
@@ -78,7 +79,7 @@ public class AdvertisementController {
             .body(new ApiResponse(true, "Advertisement Updated Successfully"));
     }
 
-    @DeleteMapping("{advertisementId}")
+    @DeleteMapping("/{advertisementId}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> deleteAdvertisement(@CurrentUser UserPrincipal currentUser,
                                                  @PathVariable Long advertisementId) {

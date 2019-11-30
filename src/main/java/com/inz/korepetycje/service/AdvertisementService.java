@@ -3,6 +3,7 @@ package com.inz.korepetycje.service;
 import com.inz.korepetycje.exception.BadRequestException;
 import com.inz.korepetycje.exception.ResourceNotFoundException;
 import com.inz.korepetycje.model.*;
+import com.inz.korepetycje.model.advertisement.*;
 import com.inz.korepetycje.payload.AdvertisementRequest;
 import com.inz.korepetycje.payload.AdvertisementResponse;
 import com.inz.korepetycje.payload.PagedResponse;
@@ -20,7 +21,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.management.RuntimeErrorException;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
@@ -123,13 +123,13 @@ public class AdvertisementService {
     }
 
     public PagedResponse<AdvertisementResponse> getAdvertisementsCreatedBy(String username,
-                                                                           UserPrincipal currentUser,
+                                                                           Boolean tutoring,
                                                                            int page,
                                                                            int size) {
         User user = userRepository.findByUsername(username)
             .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "createdAt");
-        Page<Advertisement> ads = advertisementRepository.findByCreatedBy(user.getId(), pageable);
+        Page<Advertisement> ads = advertisementRepository.findByCreatedByAndTutoring(user.getId(),tutoring, pageable);
 
 
         if (ads.getNumberOfElements() == 0) {
