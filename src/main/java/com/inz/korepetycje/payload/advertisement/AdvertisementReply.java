@@ -1,4 +1,4 @@
-package com.inz.korepetycje.payload;
+package com.inz.korepetycje.payload.advertisement;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -9,12 +9,11 @@ public class AdvertisementReply {
     private Boolean isWeekly;
 
     @NotNull
-    private LocalDateTime startTime;
+    private LocalDateTime startTime; // 11.11.2019 17:00
 
-    @NotNull
-    private LocalDateTime endTime;
+    private LocalDateTime endTime; // 11.12.2019
 
-    public AdvertisementReply(@NotNull Boolean isWeekly, @NotNull LocalDateTime startTime, @NotNull LocalDateTime endTime) {
+    public AdvertisementReply(@NotNull Boolean isWeekly, @NotNull LocalDateTime startTime,  LocalDateTime endTime) {
         this.isWeekly = isWeekly;
         this.startTime = startTime;
         this.endTime = endTime;

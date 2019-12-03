@@ -13,10 +13,10 @@ public class TimeSlot {
     private Long id;
 
     @NotNull
-    private LocalTime startTime;
+    private LocalTime startTime; //15
 
     @NotNull
-    private int duration;
+    private int duration; // in minutes
 
     @NotNull
     private int dayOfWeek; // 1 - poniedzielak, 7 - niedziela
@@ -24,6 +24,8 @@ public class TimeSlot {
     @ManyToOne
     @JoinColumn(name="activityTime_id", nullable=false)
     private ActivityTime activityTime;
+
+    private Boolean isFree = true;
 
     public TimeSlot() {
     }
@@ -73,5 +75,13 @@ public class TimeSlot {
 
     public void setActivityTime(ActivityTime activityTime) {
         this.activityTime = activityTime;
+    }
+
+    public Boolean getFree() {
+        return isFree;
+    }
+
+    public void setFree(Boolean free) {
+        isFree = free;
     }
 }

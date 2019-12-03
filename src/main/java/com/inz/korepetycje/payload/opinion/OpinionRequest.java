@@ -1,4 +1,4 @@
-package com.inz.korepetycje.payload;
+package com.inz.korepetycje.payload.opinion;
 
 public class OpinionRequest {
     private int rating;

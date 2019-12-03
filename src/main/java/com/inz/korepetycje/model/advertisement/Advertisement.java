@@ -1,5 +1,6 @@
 package com.inz.korepetycje.model.advertisement;
 
+import com.inz.korepetycje.model.Appointment;
 import com.inz.korepetycje.model.audit.UserDateAudit;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class Advertisement extends UserDateAudit {
     private String title;
 
     @NotBlank
+    @Column(length=10485760)
     private String description;
 
     private double price;
@@ -41,12 +43,10 @@ public class Advertisement extends UserDateAudit {
 
     private LessonLocationTypeName lessonLocationType;
 
-    @NotNull
     private Boolean tutoring;
 
     @ElementCollection
     private List<String> locations = new ArrayList<>();
-
 
     public Advertisement() {
     }

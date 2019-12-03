@@ -1,4 +1,6 @@
-package com.inz.korepetycje.payload;
+package com.inz.korepetycje.payload.advertisement;
+
+import com.inz.korepetycje.payload.authentication.UserSummary;
 
 import java.util.List;
 

@@ -1,4 +1,6 @@
-package com.inz.korepetycje.payload;
+package com.inz.korepetycje.payload.opinion;
+
+import com.inz.korepetycje.payload.authentication.UserSummary;
 
 public class OpinionResponse {
 

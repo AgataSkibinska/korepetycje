@@ -1,20 +1,19 @@
 package com.inz.korepetycje.model;
 
+import com.inz.korepetycje.model.audit.UserDateAudit;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "activity_time")
-public class ActivityTime {
+public class ActivityTime extends UserDateAudit {
 
     @Id
     @GeneratedValue
     private Long id;
-
-    @OneToOne(mappedBy = "activityTime")
-    private User user;
 
     @NotNull
     private LocalDateTime startTime;
@@ -22,15 +21,14 @@ public class ActivityTime {
     @NotNull
     private LocalDateTime endDate;
 
-    @OneToMany(mappedBy="activityTime")
-    private Set<TimeSlot> timeSlots;
+    @OneToMany(mappedBy="activityTime",cascade = CascadeType.ALL)
+    private List<TimeSlot> timeSlots;
 
-    ActivityTime () {
+    public ActivityTime () {
 
     }
 
-    public ActivityTime(User user, @NotNull LocalDateTime startTime, @NotNull LocalDateTime endDate) {
-        this.user = user;
+    public ActivityTime(@NotNull LocalDateTime startTime, @NotNull LocalDateTime endDate) {
         this.startTime = startTime;
         this.endDate = endDate;
     }
@@ -41,14 +39,6 @@ public class ActivityTime {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public LocalDateTime getStartTime() {
@@ -65,5 +55,13 @@ public class ActivityTime {
 
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
+    }
+
+    public List<TimeSlot> getTimeSlots() {
+        return timeSlots;
+    }
+
+    public void setTimeSlots(List<TimeSlot> timeSlots) {
+        this.timeSlots = timeSlots;
     }
 }

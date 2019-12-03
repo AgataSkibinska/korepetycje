@@ -1,5 +1,7 @@
 package com.inz.korepetycje.model;
 
+import com.inz.korepetycje.model.advertisement.Advertisement;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -15,7 +17,6 @@ public class Appointment {
     @NotNull
     private LocalDateTime startDate;
 
-    @NotNull
     private LocalDateTime endDate;
 
     @NotNull
@@ -23,15 +24,15 @@ public class Appointment {
 
     private int duration;
 
-    private AppointmentStatus status;
+    private AppointmentStatus status = AppointmentStatus.PENDING;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="student_id", nullable=false)
     private User student;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="tutor_id", nullable=false)
-    private User tutor;
+    @JoinColumn(name="advertisement_id", nullable=false)
+    private Advertisement advertisement;
 
     public Appointment(){
 
@@ -48,7 +49,6 @@ public class Appointment {
         this.isWeekly = isWeekly;
         this.duration = duration;
         this.student = student;
-        this.tutor = tutor;
     }
 
     public Long getId() {
@@ -107,11 +107,11 @@ public class Appointment {
         this.student = student;
     }
 
-    public User getTutor() {
-        return tutor;
+    public Advertisement getAdvertisement() {
+        return advertisement;
     }
 
-    public void setTutor(User tutor) {
-        this.tutor = tutor;
+    public void setAdvertisement(Advertisement advertisement) {
+        this.advertisement = advertisement;
     }
 }

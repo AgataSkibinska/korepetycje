@@ -4,8 +4,8 @@ import com.inz.korepetycje.exception.BadRequestException;
 import com.inz.korepetycje.exception.ResourceNotFoundException;
 import com.inz.korepetycje.model.*;
 import com.inz.korepetycje.model.advertisement.*;
-import com.inz.korepetycje.payload.AdvertisementRequest;
-import com.inz.korepetycje.payload.AdvertisementResponse;
+import com.inz.korepetycje.payload.advertisement.AdvertisementRequest;
+import com.inz.korepetycje.payload.advertisement.AdvertisementResponse;
 import com.inz.korepetycje.payload.PagedResponse;
 import com.inz.korepetycje.repository.AdvertisementRepository;
 import com.inz.korepetycje.repository.SubjectRepository;
@@ -74,12 +74,13 @@ public class AdvertisementService {
         advertisement.setDurationInMinutes(advertisementRequest.getDurationInMinutes());
         advertisement.setPrice(advertisementRequest.getPrice());
         advertisement.setTutoring(advertisementRequest.getTutoring());
+        advertisement.setLocations(advertisementRequest.getLocations());
 
         advertisement.setCurriculumRange(CurriculumRangeName.valueOf(advertisementRequest.getCurriculumRange()));
         advertisement.setLessonLocationType(LessonLocationTypeName.valueOf(advertisementRequest.getLessonLocationType()));
 
         Subject subject = subjectRepository.findSubjectByName(
-            SubjectName.valueOf(advertisementRequest.getSubject()))
+            advertisementRequest.getSubject())
             .orElseThrow(() -> new ResourceNotFoundException("Subject", "name", advertisementRequest.getSubject()));
 
 
@@ -169,7 +170,7 @@ public class AdvertisementService {
         advertisement.setLessonLocationType(LessonLocationTypeName.valueOf(advertisementRequest.getLessonLocationType()));
 
         Subject subject = subjectRepository.findSubjectByName(
-            SubjectName.valueOf(advertisementRequest.getSubject()))
+            advertisementRequest.getSubject())
             .orElseThrow(() -> new ResourceNotFoundException("Subject", "name", advertisementRequest.getSubject()));
 
         advertisement.setSubject(subject);

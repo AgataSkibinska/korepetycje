@@ -1,4 +1,4 @@
-package com.inz.korepetycje.payload;
+package com.inz.korepetycje.payload.authentication;
 
 public class JwtAuthenticationResponse {
     private String accessToken;

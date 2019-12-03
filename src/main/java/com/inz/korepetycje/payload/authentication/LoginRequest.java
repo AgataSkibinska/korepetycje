@@ -1,4 +1,4 @@
-package com.inz.korepetycje.payload;
+package com.inz.korepetycje.payload.authentication;
 
 import javax.validation.constraints.NotBlank;
 

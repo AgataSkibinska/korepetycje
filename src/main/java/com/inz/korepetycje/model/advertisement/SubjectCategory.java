@@ -13,10 +13,9 @@ public class SubjectCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
     @NaturalId
     @Column(length = 60)
-    private SubjectCategoryName name;
+    private String name;
 
     @OneToMany(mappedBy = "category")
     private List<Subject> subjects = new ArrayList<>();
@@ -24,7 +23,7 @@ public class SubjectCategory {
     public SubjectCategory() {
     }
 
-    public SubjectCategory(SubjectCategoryName name) {
+    public SubjectCategory(String name) {
         this.name = name;
     }
 
@@ -36,11 +35,11 @@ public class SubjectCategory {
         this.id = id;
     }
 
-    public SubjectCategoryName getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(SubjectCategoryName name) {
+    public void setName(String name) {
         this.name = name;
     }
 

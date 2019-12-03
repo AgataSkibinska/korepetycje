@@ -1,15 +1,23 @@
 package com.inz.korepetycje.controller;
 
 import com.inz.korepetycje.exception.ResourceNotFoundException;
-import com.inz.korepetycje.model.Opinion;
 import com.inz.korepetycje.model.User;
 import com.inz.korepetycje.payload.*;
+import com.inz.korepetycje.payload.advertisement.AdvertisementResponse;
+import com.inz.korepetycje.payload.authentication.UserIdentityAvailability;
+import com.inz.korepetycje.payload.authentication.UserProfile;
+import com.inz.korepetycje.payload.authentication.UserSummary;
+import com.inz.korepetycje.payload.opinion.OpinionRequest;
+import com.inz.korepetycje.payload.opinion.OpinionResponse;
+import com.inz.korepetycje.payload.timetable.TimetableResponse;
+import com.inz.korepetycje.payload.timetable.TimetableSlotsRequest;
 import com.inz.korepetycje.repository.AdvertisementRepository;
 import com.inz.korepetycje.repository.UserRepository;
 import com.inz.korepetycje.security.CurrentUser;
 import com.inz.korepetycje.security.UserPrincipal;
 import com.inz.korepetycje.service.AdvertisementService;
 import com.inz.korepetycje.service.OpinionService;
+import com.inz.korepetycje.service.TimetableService;
 import com.inz.korepetycje.utils.AppConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,14 +35,16 @@ public class UserController {
     private AdvertisementRepository advertisementRepository;
     private AdvertisementService advertisementService;
     private OpinionService opinionService;
+    private TimetableService timetableService;
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    public UserController(UserRepository userRepository, AdvertisementRepository advertisementRepository, AdvertisementService advertisementService, OpinionService opinionService) {
+    public UserController(UserRepository userRepository, AdvertisementRepository advertisementRepository, AdvertisementService advertisementService, OpinionService opinionService, TimetableService timetableService) {
         this.userRepository = userRepository;
         this.advertisementRepository = advertisementRepository;
         this.advertisementService = advertisementService;
         this.opinionService = opinionService;
+        this.timetableService = timetableService;
     }
 
     @GetMapping("/user/me")
@@ -69,8 +79,8 @@ public class UserController {
 
     @GetMapping("/users/{userName}/tutorAdvertisements")
     public PagedResponse<AdvertisementResponse> getTutorAdvertisementsCreatedBy(@PathVariable(value = "userName") String username,
-                                                                  @RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
-                                                                  @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
+                                                                                @RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
+                                                                                @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
         return advertisementService.getAdvertisementsCreatedBy(username,true, page, size);
     }
 
@@ -93,6 +103,22 @@ public class UserController {
         return ResponseEntity.ok()
             .body(new ApiResponse(true, "Advertisement Created Successfully"));
     }
+
+    @PostMapping("/user/timetable")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<?> createTimeTable(@RequestBody TimetableSlotsRequest timetableSlotsRequest) {
+        timetableService.createTimetable(timetableSlotsRequest);
+        return ResponseEntity.ok()
+            .body(new ApiResponse(true, "Timetable Created Successfully"));
+    }
+
+    @GetMapping("/users/{userName}/timetable")
+    public TimetableResponse getAllAvailableTimeSlots(@PathVariable(value = "userName") String username,
+                                                      @RequestParam(value = "days",
+                                                          defaultValue = AppConstants.DEFAULT_DAYS_RANGE) int days){
+        return timetableService.getAllAvailableTimeSlotsPerPeriod(username, days);
+    }
+
 
 
 }

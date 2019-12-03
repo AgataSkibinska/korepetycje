@@ -1,9 +1,9 @@
-package com.inz.korepetycje.payload;
+package com.inz.korepetycje.payload.advertisement;
 
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 public class AdvertisementRequest {
 
@@ -14,23 +14,22 @@ public class AdvertisementRequest {
     @NotBlank
     private String description;
 
-    @NotNull
+
     private double price;
 
-    @NotNull
+
     private int durationInMinutes;
 
     @NotBlank
     private String subject;
 
-    @NotBlank
     private String curriculumRange;
 
-    @NotBlank
     private String lessonLocationType;
 
-    @NotNull
     private Boolean tutoring;
+
+    private List<String> locations;
 
     public String getTitle() {
         return title;
@@ -94,5 +93,13 @@ public class AdvertisementRequest {
 
     public void setTutoring(Boolean tutoring) {
         this.tutoring = tutoring;
+    }
+
+    public List<String> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<String> locations) {
+        this.locations = locations;
     }
 }

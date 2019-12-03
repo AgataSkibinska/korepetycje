@@ -12,10 +12,9 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
     @NaturalId
     @Column(length = 60)
-    private SubjectName name;
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "fk_category")
@@ -24,7 +23,7 @@ public class Subject {
     public Subject() {
     }
 
-    public Subject(SubjectName name, SubjectCategory category) {
+    public Subject(String name, SubjectCategory category) {
         this.name = name;
         this.category = category;
     }
@@ -37,11 +36,11 @@ public class Subject {
         this.id = id;
     }
 
-    public SubjectName getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(SubjectName name) {
+    public void setName(String name) {
         this.name = name;
     }
 

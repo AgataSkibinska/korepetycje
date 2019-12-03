@@ -3,9 +3,9 @@ package com.inz.korepetycje.utils;
 import com.inz.korepetycje.model.Opinion;
 import com.inz.korepetycje.model.advertisement.Advertisement;
 import com.inz.korepetycje.model.User;
-import com.inz.korepetycje.payload.AdvertisementResponse;
-import com.inz.korepetycje.payload.OpinionResponse;
-import com.inz.korepetycje.payload.UserSummary;
+import com.inz.korepetycje.payload.advertisement.AdvertisementResponse;
+import com.inz.korepetycje.payload.opinion.OpinionResponse;
+import com.inz.korepetycje.payload.authentication.UserSummary;
 
 public class ModelMapper {
 
@@ -19,7 +19,7 @@ public class ModelMapper {
         response.setTitle(advertisement.getTitle());
         response.setCurriculumRange(advertisement.getCurriculumRange().name());
         response.setLessonLocationType(advertisement.getLessonLocationType().name());
-        response.setSubject(advertisement.getSubject().getName().name());
+        response.setSubject(advertisement.getSubject().getName());
         response.setLocations(advertisement.getLocations());
 
         UserSummary userSummary = new UserSummary(creator.getId(),
